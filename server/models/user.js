@@ -25,6 +25,15 @@ var UserSchema = new mongoose.Schema({
 	}
 })
 
+UserSchema.path('email').validate(function(value, done){
+	this.model('User').count({email: value}, function(err, count){
+		if(err){
+			return done(err);
+		}
+		done(!count);
+	});
+}, 'Email already exists')
+
 UserSchema.pre('save', function(done){
 	this.password = bcrypt.hashSync(this.password, bcrypt.genSaltSync(8));
 	done();
