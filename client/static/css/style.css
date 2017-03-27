@@ -2,3 +2,27 @@
 .error{
 	color: red;
 }
+.navbar{
+	display: block;
+	padding-left: 0;
+	margin: 0;
+}
+	.navbar li{
+		display: inline-block;
+		width: auto;
+	}
+#description{
+	width: 45%;
+}
+#title{
+	width: 35%;
+}
+.form-control{
+	width: 100% !important;
+}
+#tasks_ul{
+	list-style-type: none;
+}
+span{
+	margin: 0 5px;
+}

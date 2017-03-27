@@ -18,6 +18,10 @@ myApp.factory('UserFactory', function($http, $cookies){
 		})
 	}
 
+	factory.show = function(user_id, callback){
+		$http.get('/users/' + user_id).then(callback)
+	}
+
 	factory.login = function(data, callback){
 		$http.post('/sessions', data).then(function(res){
 			if(!res.data.errors){

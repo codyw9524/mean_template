@@ -1,22 +1,37 @@
-myApp.controller('UsersController', function(UserFactory, $cookies, $location){
+myApp.controller('UsersController', function(UserFactory, $cookies, $location, $routeParams){
 	console.log('instanciating UsersController')
 	
 	var self = this;
 	self.registrationErrors = [];
 	self.loginErrors = [];
-	self.user = {};
+	self.current_user = {};
+	self.users = [];
 
 	UserFactory.session(function(res){
 		console.log("Is there a User ID in session?", res)
 		if(res){
-			self.user = res.data;
+			self.current_user = res.data;
 		} else {
+			console.log('redirecting bc no id in session...')
 			$location.url('/');
 		}
 	})
 
+	self.show = function(){
+		UserFactory.show($routeParams.id, function(res){
+			self.user = res.data;
+		})
+	}
+
+
 	self.closeAlert = function(index, array){
 		array.splice(index, 1);
+	}
+
+	self.index = function(){
+		UserFactory.index(function(res){
+			self.users = res.data;
+		})
 	}
 
 	self.login = function(loginUser){
@@ -35,7 +50,7 @@ myApp.controller('UsersController', function(UserFactory, $cookies, $location){
 					})
 				}
 			} else {
-				$location.url('/success')
+				$location.url('/dashboard')
 			}
 		})
 	}
@@ -62,8 +77,14 @@ myApp.controller('UsersController', function(UserFactory, $cookies, $location){
 				}
 			} else {
 				console.log('user added to DB')
-				$location.url('/success')
+				$location.url('/dashboard')
 			}
 		})
 	}
+
+	if($location.$$path.indexOf('users') != -1){
+		self.show()
+	}
+
+	self.index()
 })

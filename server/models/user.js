@@ -37,7 +37,7 @@ UserSchema.path('email').validate(function(value, done){
 UserSchema.pre('save', function(done){
 	this.password = bcrypt.hashSync(this.password, bcrypt.genSaltSync(8));
 	done();
-})
+}, {timestamps: true})
 
 var User = mongoose.model('User', UserSchema);
 

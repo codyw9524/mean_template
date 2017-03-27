@@ -6,8 +6,12 @@ myApp.config(function($routeProvider){
 			templateUrl: '/partials/new_user.html',
 			controller: 'UsersController as UC'
 		})
-		.when('/success', {
-			templateUrl: '/partials/success.html',
+		.when('/dashboard', {
+			templateUrl: '/partials/dashboard.html',
+			controller: 'UsersController as UC'
+		})
+		.when('/users/:id', {
+			templateUrl: '/partials/user_show.html',
 			controller: 'UsersController as UC'
 		})
 		.otherwise({

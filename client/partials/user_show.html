@@ -1,0 +1,48 @@
+<div class="row">
+	<div class="col-sm-12">
+		<ul class="navbar">
+			<li>Bucket List</li>
+			<li><a href="/#!/dashboard">Dashboard</a></li>
+			<li><a href="" ng-click="UC.logout()">Logout</a></li>
+		</ul>
+	</div>
+</div>
+<div class="row">
+	<div class="col-sm-12">
+		<h2>{{UC.user.name}}'s List</h2>
+	</div>
+</div>
+<div ng-controller="TasksController as TC">
+	<div class="row">
+		<div class="col-sm-12">
+			<h4>Done</h4>
+			<ul>
+				<li ng-repeat="task in TC.tasks" ng-if="task.status == true">
+					<input ng-click="TC.update(task._id)" type="checkbox" checked disabled>
+					<span>{{task._user.name}}</span>
+					<span>|</span>
+					<span>{{task.title}}</span>
+					<span>-</span>
+					<span>{{task.description}}</span>
+					<span>{{task.createdAt}}</span>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12">
+			<h4>Pending</h4>
+			<ul>
+				<li ng-repeat="task in TC.tasks" ng-if="task.status == false">
+					<input ng-click="TC.update(task._id)" type="checkbox" disabled>
+					<span>{{task._user.name}}</span>
+					<span>|</span>
+					<span>{{task.title}}</span>
+					<span>-</span>
+					<span>{{task.description}}</span>
+					<span>{{task.createdAt}}</span>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
